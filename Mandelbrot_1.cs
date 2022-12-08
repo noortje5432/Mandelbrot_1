@@ -3,18 +3,15 @@ using System.Drawing;
 using System.Windows.Forms;
 
 Form scherm = new();
-Bitmap bm;
-Label afbeelding;
-TextBox boxMidX;
-TextBox boxMidY;
-TextBox boxSchaal;
-TextBox boxMaxA;
-double MidX=0, MidY=0, Schaal=0, MaxA=0;
+
+
+double MidX = 0, MidY = 0, Schaal = 0, MaxA = 0;
 
 scherm.Text = "Mandelbrot";
 scherm.BackColor = Color.LightBlue;
 scherm.ClientSize = new Size(600, 700);
-bm = new(400, 400);
+Bitmap bm = new(400, 400);
+Color kleur;
 
 
 //Aanmaken van de button Go!
@@ -33,10 +30,10 @@ labSchaal.Location = new Point(10, 90); labSchaal.Size = new Size(100, 30); labS
 labMaxA.Location = new Point(10, 130); labMaxA.Size = new Size(100, 30); labMaxA.Text = "Maximaal aantal:";
 
 //Schrijfvlakken maken
-boxMidX = new TextBox(); scherm.Controls.Add((TextBox)boxMidX);
-boxMidY = new TextBox(); scherm.Controls.Add((TextBox)boxMidY);
-boxSchaal = new TextBox(); scherm.Controls.Add((TextBox)boxSchaal);
-boxMaxA = new TextBox(); scherm.Controls.Add((TextBox)boxMaxA);
+TextBox boxMidX = new TextBox(); scherm.Controls.Add((TextBox)boxMidX);
+TextBox boxMidY = new TextBox(); scherm.Controls.Add((TextBox)boxMidY);
+TextBox boxSchaal = new TextBox(); scherm.Controls.Add((TextBox)boxSchaal);
+TextBox boxMaxA = new TextBox(); scherm.Controls.Add((TextBox)boxMaxA);
 
 boxMidX.Location = new Point(150, 10); boxMidX.Size = new Size(100, 30); boxMidX.Text = 0.ToString();
 boxMidY.Location = new Point(150, 50); boxMidY.Size = new Size(100, 30); boxMidY.Text = 0.ToString();
@@ -46,13 +43,22 @@ boxMaxA.Location = new Point(150, 130); boxMaxA.Size = new Size(100, 30); boxMax
 //Achtergrond Mandelbrot maken
 
 
-afbeelding = new Label(); scherm.Controls.Add(afbeelding);
+Label afbeelding = new Label(); scherm.Controls.Add(afbeelding);
 afbeelding.Location = new Point(10, 190);
 afbeelding.Size = new Size(400, 400);
 afbeelding.Image = bm;
 
+// ComboBox maken voor kleurkeuzes
 
-void TekenBitmap(object o , PaintEventArgs pea)
+ComboBox ComboBoxKleuren = new ComboBox();
+ComboBoxKleuren.Location = new Point(10, 170);
+ComboBoxKleuren.Size = new Size(100, 20);
+ComboBoxKleuren.Items.Add("ZwartWit");
+ComboBoxKleuren.Items.Add("Rood");
+ComboBoxKleuren.Items.Add("Party");
+
+
+void TekenBitmap(object o, PaintEventArgs pea)
 {
     for (int x = 0; x < 400; x++)
     {
@@ -71,12 +77,26 @@ void TekenBitmap(object o , PaintEventArgs pea)
                 b = Nieuweb(oudea, oudeb, yschaal);
                 Mandelgetal++;
             }
+            switch (ComboBoxKleuren.SelectedItem)
+            {
+                case "ZwartWit":
+                    kleur = ZwartWit(Mandelgetal);
+                    break;
+                case "Rood":
+                    kleur = Rood(Mandelgetal);
+                    break;
+                case "Party":
+                    kleur = Party(Mandelgetal);
+                    break;
+            }
 
-            if (Mandelgetal % 2 == 1 && Mandelgetal < MaxA)
+            bm.SetPixel(x, y, kleur);
+
+            /* if (Mandelgetal % 2 == 1 && Mandelgetal < MaxA)
                 bm.SetPixel(x, y, Color.White);
             else
                 bm.SetPixel(x, y, Color.Black);
-
+           */
 
         }
         afbeelding.Invalidate();
@@ -102,12 +122,12 @@ void BoxVeranderd(object sender, EventArgs e)
 
 void KlikGo(object sender, EventArgs e)
 {
-    if (sender == Go) 
+    if (sender == Go)
     {
         scherm.Invalidate();
         afbeelding.Invalidate();
-    } 
-    
+    }
+
 }
 
 void KlikRechts(object sender, MouseEventArgs e)
@@ -119,13 +139,13 @@ void KlikRechts(object sender, MouseEventArgs e)
     double CoordX = (MidX - 200) * OudeSchaal;
     double CoordY = (-MidY + 200) * OudeSchaal;
     double NieuweSchaal = Schaal;
-    boxMidX.Text = CoordX.ToString(); 
+    boxMidX.Text = CoordX.ToString();
     boxMidY.Text = CoordY.ToString();
     boxSchaal.Text = NieuweSchaal.ToString();
     afbeelding.Invalidate();
 }
 
-double AfstandTotMidden(double a, double b) 
+double AfstandTotMidden(double a, double b)
 {
     double d = (a) * (a) + (b) * (b);
     return d;
@@ -163,7 +183,7 @@ Color Party(int Mandelgetal)
     if (Mandelgetal % 2 == 0)
         return Color.Black;
     else
-        return Color.FromArgb(0, 0, Mandelgetal % 16 * 15);   
+        return Color.FromArgb(0, 0, Mandelgetal % 16 * 15);
 }
 
 
