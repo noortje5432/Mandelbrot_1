@@ -152,7 +152,18 @@ Color ZwartWit(int Mandelgetal)
 
 Color Rood(int Mandelgetal)
 {
+    if (Mandelgetal % 2 == 0)
+        return Color.Black;
+    else
+        return Color.FromArgb(255 - Mandelgetal % 16 * 16, 255 - Mandelgetal, 0);
+}
 
+Color Party(int Mandelgetal)
+{
+    if (Mandelgetal % 2 == 0)
+        return Color.Black;
+    else
+        return Color.FromArgb(0, 0, Mandelgetal % 16 * 15);   
 }
 
 
