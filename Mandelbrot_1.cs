@@ -63,8 +63,8 @@ void TekenBitmap(object o , PaintEventArgs pea)
             double b = 0;
             while (AfstandTotMidden(a, b) <= 4 && Mandelgetal < MaxA)
             {
-                double xschaal = (x - 200) * Schaal - MidX;
-                double yschaal = (y - 200) * Schaal - MidY;
+                double xschaal = (double)(x - 200.0) * Schaal + MidX;
+                double yschaal = (double)(-y + 200.0) * Schaal + MidY;
                 double oudea = a;
                 double oudeb = b;
                 a = Nieuwea(oudea, oudeb, xschaal);
@@ -105,6 +105,7 @@ void KlikGo(object sender, EventArgs e)
     if (sender == Go) 
     {
         scherm.Invalidate();
+        afbeelding.Invalidate();
     } 
     
 }
@@ -116,7 +117,7 @@ void KlikRechts(object sender, MouseEventArgs e)
     double OudeSchaal = Schaal;
     Schaal *= 0.5;
     double CoordX = (MidX - 200) * OudeSchaal;
-    double CoordY = (MidY - 200) * OudeSchaal;
+    double CoordY = (-MidY + 200) * OudeSchaal;
     double NieuweSchaal = Schaal;
     boxMidX.Text = CoordX.ToString(); 
     boxMidY.Text = CoordY.ToString();
@@ -126,7 +127,7 @@ void KlikRechts(object sender, MouseEventArgs e)
 
 double AfstandTotMidden(double a, double b) 
 {
-    double d = (a - MidX) * (a - MidX) + (b - MidY) * (b - MidY);
+    double d = (a) * (a) + (b) * (b);
     return d;
 }
 
