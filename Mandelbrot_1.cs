@@ -142,6 +142,19 @@ double Nieuweb(double a, double b, double yschaal)
     double nieuweb = 2 * a * b + yschaal;
     return nieuweb;
 }
+Color ZwartWit(int Mandelgetal)
+{
+    if (Mandelgetal % 2 == 0)
+        return Color.Black;
+    else
+        return Color.White;
+}
+
+Color Rood(int Mandelgetal)
+{
+
+}
+
 
 Go.Click += KlikGo;
 boxMidX.TextChanged += BoxVeranderd;
