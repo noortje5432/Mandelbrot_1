@@ -95,7 +95,7 @@ int mandelgetal(double x, double y)
 
 
 /* Dit is de methode om de kleuren die in de combobox zijn gekozen te koppelen 
-aan een daadwerkelijke kleur */
+aan aan een daadwerkelijke kleur */
 
 void GeefKleur(int Mandelgetal, int x, int y)
 {
