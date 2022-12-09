@@ -120,7 +120,7 @@ void GeefKleur(int Mandelgetal, int x, int y)
 Vervolgens wordt er eventueel een komma in de doubles vervangen door een punt.
 Deze waarde wordt als double uitgelezen, op de manier hoe de desbetreffende computer hiermee kan rekenen.
 Als er 'verkeerde waarden'(geen doubles in midden x, midden y en schaal en geen integer in maximaal aantal) in de tekstvakken
-worden ingevuld, zal het tekstvak door de catch rood kleuren 
+worden ingevuld, zal het tekstvak door de catch rood kleuren.
  */
 void BoxVeranderd(object sender, EventArgs e)
 {
@@ -142,6 +142,7 @@ void BoxVeranderd(object sender, EventArgs e)
     }
 }
 
+//Als de Go-knop wordt gebruikt, wordt het scherm herladen. 
 void KlikGo(object sender, EventArgs e)
 {
     if (sender == Go)
@@ -150,6 +151,9 @@ void KlikGo(object sender, EventArgs e)
     }
 }
 
+/*
+
+*/
 void MuisKlik(object sender, MouseEventArgs e)
 {
     double PixelX = e.X;
