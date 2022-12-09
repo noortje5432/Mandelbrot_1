@@ -1,22 +1,23 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Globalization;
 
 Form scherm = new();
 double MidX = 0, MidY = 0, Schaal = 0, MaxA = 0;
 
+//Eerst wordt het volledige scherm en de bitmap aangemaakt.
 scherm.Text = "Mandelbrot";
 scherm.BackColor = Color.LightBlue;
-scherm.ClientSize = new Size(600, 700);
+scherm.ClientSize = new Size(420, 700);
 Bitmap bm = new(400, 400);
-Color kleur;
 
 
 //Aanmaken van de button Go!
 Button Go = new(); scherm.Controls.Add(Go);
 Go.Location = new Point(280, 130); Go.Text = "Go!";
 
-//tekstvakken maken
+//tekstvakken maken en locatie geven.
 Label labMidX = new(); scherm.Controls.Add(labMidX);
 Label labMidY = new(); scherm.Controls.Add(labMidY);
 Label labSchaal = new(); scherm.Controls.Add(labSchaal);
@@ -27,7 +28,7 @@ labMidY.Location = new Point(10, 50); labMidY.Size = new Size(100, 30); labMidY.
 labSchaal.Location = new Point(10, 90); labSchaal.Size = new Size(100, 30); labSchaal.Text = "Schaal:";
 labMaxA.Location = new Point(10, 130); labMaxA.Size = new Size(100, 30); labMaxA.Text = "Maximaal aantal:";
 
-//Schrijfvlakken maken
+//Invulvlakken maken
 TextBox boxMidX = new(); scherm.Controls.Add((TextBox)boxMidX);
 TextBox boxMidY = new(); scherm.Controls.Add((TextBox)boxMidY);
 TextBox boxSchaal = new(); scherm.Controls.Add((TextBox)boxSchaal);
@@ -42,7 +43,7 @@ boxMaxA.Location = new Point(150, 130); boxMaxA.Size = new Size(100, 30); boxMax
 
 
 Label afbeelding = new(); scherm.Controls.Add(afbeelding);
-afbeelding.Location = new Point(10, 190);
+afbeelding.Location = new Point(10, 210);
 afbeelding.Size = new Size(400, 400);
 afbeelding.Image = bm;
 
@@ -89,6 +90,7 @@ int mandelgetal(double x, double y)
 
 void GeefKleur(int Mandelgetal, int x, int y)
 {
+    Color kleur;
     switch (ComboBoxKleuren.SelectedItem)
     {
         case "ZwartWit":
@@ -108,12 +110,11 @@ void GeefKleur(int Mandelgetal, int x, int y)
     afbeelding.Invalidate();
 }
 
-
-        void BoxVeranderd(object sender, EventArgs e)
+void BoxVeranderd(object sender, EventArgs e)
 {
     try
     {
-        MidX = double.Parse(boxMidX.Text); boxMidX.BackColor = Color.White;
+        MidX = double.Parse(boxMidX.Text, CultureInfo.InvariantCulture); boxMidX.BackColor = Color.White;
         MidY = double.Parse(boxMidY.Text); boxMidY.BackColor = Color.White;
         Schaal = double.Parse(boxSchaal.Text); boxSchaal.BackColor = Color.White;
         MaxA = double.Parse(boxMaxA.Text); boxMaxA.BackColor = Color.White;
@@ -131,7 +132,6 @@ void KlikGo(object sender, EventArgs e)
     if (sender == Go)
     {
         scherm.Invalidate();
-        afbeelding.Invalidate();
     }
 }
 
@@ -216,7 +216,6 @@ Color Oase(int Mandelgetal)
             B = Mandelgetal;
             return Color.FromArgb(R, G, B);
         }       
-
 }
 
 Color Blauw(int Mandelgetal)
