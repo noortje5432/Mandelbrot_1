@@ -88,10 +88,11 @@ int mandelgetal(double x, double y)
         double oudeb = b;
         a = Nieuwea(oudea, oudeb, xschaal);                         //Hier wordt f(a,b) berekend.  
         b = Nieuweb(oudea, oudeb, yschaal);                         //Merk hierbij op dat we oudea en oudeb gebruikt worden, omdat ander f(b) niet goed berekend wordt.
-        Mandelgetal++;                                              //Er wordt één bij Manderlgetal opgeteld. 
+        Mandelgetal++;                                              //Er wordt één bij Mandelgetal opgeteld. 
     }
     return Mandelgetal;                                             //Mandelgetal wordt teruggegeven. 
 }
+
 
 // Dit is de methode om de kleuren uit de Combobox 
 void GeefKleur(int Mandelgetal, int x, int y)
@@ -211,6 +212,9 @@ Color ZwartWit(int Mandelgetal)
         return Color.White;
 }
 
+
+/* hier wordt het colorpalet van oase aangeduid.
+   Verschillende mandelgetallen hebben verschillende kleuren */
 Color Oase(int Mandelgetal)
 {
         int R = 0;
@@ -237,6 +241,8 @@ Color Oase(int Mandelgetal)
         }       
 }
 
+/* Hier wordt de kleur blauw aangeduid.
+Blauw is hier met "schaduwen" vanwege de procent/rest delingen*/
 Color Blauw(int Mandelgetal)
 {
     if (Mandelgetal % 2 == 0)
