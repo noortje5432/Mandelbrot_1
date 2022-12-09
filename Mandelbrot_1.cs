@@ -93,7 +93,6 @@ int mandelgetal(double x, double y)
     return Mandelgetal;                                             //Mandelgetal wordt teruggegeven. 
 }
 
-
 // Dit is de methode om de kleuren uit de Combobox 
 void GeefKleur(int Mandelgetal, int x, int y)
 {
@@ -113,10 +112,16 @@ void GeefKleur(int Mandelgetal, int x, int y)
             kleur = ZwartWit(Mandelgetal);
             break;
     }
-    bm.SetPixel(x, y, kleur);
+    bm.SetPixel(x, y, kleur);                                       //Pixel (x,y) krijgt een kleur.
     afbeelding.Invalidate();
 }
 
+/*In BoxVeranderd wordt gekeken of er een getal in de tekstvakken is veranderd. 
+Vervolgens wordt er eventueel een komma in de doubles vervangen door een punt.
+Deze waarde wordt als double uitgelezen, op de manier hoe de desbetreffende computer hiermee kan rekenen.
+Als er 'verkeerde waarden'(geen doubles in midden x, midden y en schaal en geen integer in maximaal aantal) in de tekstvakken
+worden ingevuld, zal het tekstvak door de catch rood kleuren 
+ */
 void BoxVeranderd(object sender, EventArgs e)
 {
     try
