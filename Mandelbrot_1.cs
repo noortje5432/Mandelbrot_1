@@ -11,6 +11,7 @@ double MidX = 0, MidY = 0, Schaal = 0, MaxA = 0;
 scherm.Text = "Mandelbrot";
 scherm.BackColor = Color.LightBlue;
 scherm.ClientSize = new Size(420, 700);
+scherm.StartPosition = FormStartPosition.CenterScreen;
 Bitmap bm = new(400, 400);
 
 
@@ -31,7 +32,7 @@ labMidY.Location = new Point(10, 50); labMidY.Size = new Size(100, 30); labMidY.
 labSchaal.Location = new Point(10, 90); labSchaal.Size = new Size(100, 30); labSchaal.Text = "Schaal:";
 labMaxA.Location = new Point(10, 130); labMaxA.Size = new Size(100, 30); labMaxA.Text = "Maximaal aantal:";
 kiesKleur.Location = new Point(10, 170); kiesKleur.Size = new Size(100, 30); kiesKleur.Text = "Kies kleur:";
-uitleg.Location = new Point(10, 650); uitleg.Size = new Size(190, 30); uitleg.Text = "Links klikken is inzoomen en rechts klikken is uitzoomen";
+uitleg.Location = new Point(10, 650); uitleg.Size = new Size(190, 30); uitleg.Text = "Linker muisknop is inzoomen en rechter muisknop is uitzoomen";
 
 
 //Invulvlakken maken
@@ -121,9 +122,9 @@ void BoxVeranderd(object sender, EventArgs e)
     try
     {
         string GoedeX = boxMidX.Text.Replace(',', '.');
-        MidX = double.Parse(boxMidX.Text/*GoedeX, CultureInfo.InvariantCulture*/); boxMidX.BackColor = Color.White;
+        MidX = double.Parse(GoedeX, CultureInfo.InvariantCulture); boxMidX.BackColor = Color.White;
         string GoedeY = boxMidY.Text.Replace(',', '.');
-        MidX = double.Parse(GoedeY, CultureInfo.InvariantCulture); boxMidY.BackColor = Color.White;
+        MidY = double.Parse(GoedeY, CultureInfo.InvariantCulture); boxMidY.BackColor = Color.White;
         string GoedeSchaal = boxSchaal.Text.Replace(',', '.');
         Schaal = double.Parse(GoedeSchaal, CultureInfo.InvariantCulture); boxSchaal.BackColor = Color.White;
         MaxA = int.Parse(boxMaxA.Text); boxMaxA.BackColor = Color.White;
