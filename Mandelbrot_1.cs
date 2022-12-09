@@ -180,8 +180,26 @@ Color Rood(int Mandelgetal)
     if (Mandelgetal % 2 == 0)
         return Color.Black;
     else
-        return Color.FromArgb(255 - Mandelgetal % 16 * 16, 255 - Mandelgetal, 0);
+        return Color.FromKnownColor(KnownColor.Red);
+    
 }
+
+/*if (n <= MAX_ITERATIONS)
+
+    double quotient = (double)n / (double)MAX_ITERATIONS;
+double color = _clamp(0.f, 1.f, quotient);
+if (quotient > 0.5)
+{
+    // Close to the mandelbrot set the color changes from green to white
+    mapping(color, 1.f, color);
+}
+else
+{
+    // Far away it changes from black to green
+    mapping.setRgbF(0.f, color, 0.f);
+}
+
+return mapping;*/
 
 Color Party(int Mandelgetal)
 {
@@ -190,6 +208,8 @@ Color Party(int Mandelgetal)
     else
         return Color.FromArgb(0, 0, Mandelgetal % 16 * 15);
 }
+
+/**/
 
 
 Go.Click += KlikGo;
