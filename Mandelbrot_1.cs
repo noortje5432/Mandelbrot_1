@@ -52,8 +52,8 @@ ComboBox ComboBoxKleuren = new(); scherm.Controls.Add(ComboBoxKleuren);
 ComboBoxKleuren.Location = new Point(10, 170);
 ComboBoxKleuren.Size = new Size(100, 20);
 ComboBoxKleuren.Items.Add("ZwartWit");
-ComboBoxKleuren.Items.Add("Rood");
-ComboBoxKleuren.Items.Add("Party");
+ComboBoxKleuren.Items.Add("Oase");
+ComboBoxKleuren.Items.Add("Blauw");
 
 
 void TekenBitmap(object o, PaintEventArgs pea)
@@ -94,11 +94,11 @@ void GeefKleur(int Mandelgetal, int x, int y)
         case "ZwartWit":
             kleur = ZwartWit(Mandelgetal);
             break;
-        case "Rood":
-            kleur = Rood(Mandelgetal);
+        case "Oase":
+            kleur = Oase(Mandelgetal);
             break;
-        case "Party":
-            kleur = Party(Mandelgetal);
+        case "Blauw":
+            kleur = Blauw(Mandelgetal);
             break;
         default:
             kleur = ZwartWit(Mandelgetal);
@@ -192,7 +192,7 @@ Color ZwartWit(int Mandelgetal)
         return Color.White;
 }
 
-Color Rood(int Mandelgetal)
+Color Oase(int Mandelgetal)
 {
         int R = 0;
         int G = 0;
@@ -219,7 +219,7 @@ Color Rood(int Mandelgetal)
 
 }
 
-Color Party(int Mandelgetal)
+Color Blauw(int Mandelgetal)
 {
     if (Mandelgetal % 2 == 0)
         return Color.Black;
