@@ -32,7 +32,8 @@ labMidY.Location = new Point(10, 50); labMidY.Size = new Size(100, 30); labMidY.
 labSchaal.Location = new Point(10, 90); labSchaal.Size = new Size(100, 30); labSchaal.Text = "Schaal:";
 labMaxA.Location = new Point(10, 130); labMaxA.Size = new Size(100, 30); labMaxA.Text = "Maximaal aantal:";
 kiesKleur.Location = new Point(10, 170); kiesKleur.Size = new Size(100, 30); kiesKleur.Text = "Kies kleur:";
-uitleg.Location = new Point(10, 650); uitleg.Size = new Size(190, 30); uitleg.Text = "Linker muisknop is inzoomen en rechter muisknop is uitzoomen";
+uitleg.Location = new Point(10, 650); uitleg.Size = new Size(190, 30); uitleg.Text = "Linker muisknop is inzoomen " +
+    "en rechter muisknop is uitzoomen";
 
 
 //Invulvlakken maken
@@ -86,11 +87,11 @@ int mandelgetal(double x, double y)
         double yschaal = (-y + 200.0) * Schaal + MidY;
         double oudea = a;
         double oudeb = b;
-        a = Nieuwea(oudea, oudeb, xschaal);                         //Hier wordt f(a,b) berekend.  
-        b = Nieuweb(oudea, oudeb, yschaal);                         //Merk hierbij op dat we oudea en oudeb gebruikt worden, omdat ander f(b) niet goed berekend wordt.
-        Mandelgetal++;                                              //Er wordt één bij Mandelgetal opgeteld. 
+        a = Nieuwea(oudea, oudeb, xschaal);         //Hier wordt f(a,b) berekend.  
+        b = Nieuweb(oudea, oudeb, yschaal);         //Merk hierbij op dat we oudea en oudeb gebruikt worden, omdat ander f(b) niet goed berekend wordt.
+        Mandelgetal++;                              //Er wordt één bij Mandelgetal opgeteld. 
     }
-    return Mandelgetal;                                             //Mandelgetal wordt teruggegeven. 
+    return Mandelgetal;                             //Mandelgetal wordt teruggegeven. 
 }
 
 
@@ -177,7 +178,7 @@ void MuisKlik(object sender, MouseEventArgs e)
         double NieuweSchaal = Schaal;
         boxSchaal.Text = NieuweSchaal.ToString();
     }
-    for (int x = 0; x < 400; x++)                                       //Nu wordt weer de kleur van iedere pixel bepaald aan de hand van Mandelgetal. 
+    for (int x = 0; x < 400; x++)                      //Nu wordt weer de kleur van iedere pixel bepaald aan de hand van Mandelgetal. 
     {
         for (int y = 0; y < 400; y++)
         {
@@ -188,7 +189,8 @@ void MuisKlik(object sender, MouseEventArgs e)
     }
 }
 
-//Hier wordt de afstand van een pixel tot het midde berekend. Merk op dat de wortel weggelaten is, hierdoor is in TekenBitmap <=4 gebruikt. 
+/*Hier wordt de afstand van een pixel tot het midde berekend.
+Merk op dat de wortel weggelaten is, hierdoor is in TekenBitmap <=4 gebruikt. */
 double AfstandTotMidden(double a, double b)
 {
     double d = a * a + b * b;
@@ -209,12 +211,10 @@ double Nieuweb(double a, double b, double yschaal)
     return nieuweb;
 }
 
-/*
-Als het mandelgetal even is 
- */
+//Als het mandelgetal even is en kleiner is dat het maximale aantal, wordt de pixel zwart, anders wit. 
 Color ZwartWit(int Mandelgetal)
 {
-    if (Mandelgetal % 2 == 0)
+    if (Mandelgetal % 2 == 0 && Mandelgetal <= MaxA)
         return Color.Black;
     else
         return Color.White;
@@ -258,6 +258,7 @@ Color Blauw(int Mandelgetal)
         return Color.FromArgb(0, 0, Mandelgetal % 16 * 15);
 }
 
+//Hier wordt functies herladen als er iets is veranderd/gebeurd.
 Go.Click += KlikGo;
 boxMidX.TextChanged += BoxVeranderd;
 boxMidY.TextChanged += BoxVeranderd;
@@ -266,4 +267,4 @@ boxMaxA.TextChanged += BoxVeranderd;
 BoxVeranderd(null, null);
 afbeelding.MouseClick += MuisKlik;
 scherm.Paint += TekenBitmap;
-Application.Run(scherm);
+Application.Run(scherm);                           //Als laatste wordt het scherm herladen om de nieuwe waarden/afbeelding te laden.
