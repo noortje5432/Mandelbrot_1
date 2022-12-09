@@ -197,6 +197,8 @@ Color Rood(int Mandelgetal)
         int R = 0;
         int G = 0;
         int B = 0;
+        while (Mandelgetal > 767)
+            Mandelgetal -= 256;
         if (Mandelgetal >= 512)
         {
             R = Mandelgetal - 512;
