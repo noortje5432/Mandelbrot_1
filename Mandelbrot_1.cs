@@ -50,7 +50,7 @@ afbeelding.Image = bm;
 
 // ComboBox maken voor kleurkeuzes
 
-ComboBox ComboBoxKleuren = new ComboBox();
+ComboBox ComboBoxKleuren = new ComboBox(); scherm.Controls.Add(ComboBoxKleuren);
 ComboBoxKleuren.Location = new Point(10, 170);
 ComboBoxKleuren.Size = new Size(100, 20);
 ComboBoxKleuren.Items.Add("ZwartWit");
@@ -88,6 +88,11 @@ void TekenBitmap(object o, PaintEventArgs pea)
                 case "Party":
                     kleur = Party(Mandelgetal);
                     break;
+                default:
+                    kleur = ZwartWit(Mandelgetal);
+                    break;
+
+
             }
 
             bm.SetPixel(x, y, kleur);
