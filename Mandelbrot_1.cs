@@ -50,7 +50,7 @@ afbeelding.Image = bm;
 
 // ComboBox maken voor kleurkeuzes
 
-ComboBox ComboBoxKleuren = new ComboBox(); scherm.Controls.Add(ComboBoxKleuren);
+ComboBox ComboBoxKleuren = new(); scherm.Controls.Add(ComboBoxKleuren);
 ComboBoxKleuren.Location = new Point(10, 170);
 ComboBoxKleuren.Size = new Size(100, 20);
 ComboBoxKleuren.Items.Add("ZwartWit");
@@ -63,49 +63,12 @@ void TekenBitmap(object o, PaintEventArgs pea)
     for (int x = 0; x < 400; x++)
     {
         for (int y = 0; y < 400; y++)
-        {
+        { 
             int Mandelgetal = mandelgetal(x,y);
-            /*int Mandelgetal = 0;
-            double a = 0;
-            double b = 0;
-            while (AfstandTotMidden(a, b) <= 4 && Mandelgetal < MaxA)
-            {
-                double xschaal = (x - 200.0) * Schaal + MidX;
-                double yschaal = (-y + 200.0) * Schaal + MidY;
-                double oudea = a;
-                double oudeb = b;
-                a = Nieuwea(oudea, oudeb, xschaal);
-                b = Nieuweb(oudea, oudeb, yschaal);
-                Mandelgetal++;*/
-            switch (ComboBoxKleuren.SelectedItem)
-            {
-                case "ZwartWit":
-                    kleur = ZwartWit(Mandelgetal);
-                    break;
-                case "Rood":
-                    kleur = Rood(Mandelgetal);
-                    break;
-                case "Party":
-                    kleur = Party(Mandelgetal);
-                    break;
-                default:
-                    kleur = ZwartWit(Mandelgetal);
-                    break;
-
-
-            }
-
-            bm.SetPixel(x, y, kleur);
-
-            /* if (Mandelgetal % 2 == 1 && Mandelgetal < MaxA)
-                bm.SetPixel(x, y, Color.White);
-            else
-                bm.SetPixel(x, y, Color.Black);
-           */
-
+            GeefKleur(Mandelgetal, x, y);
         }
-        afbeelding.Invalidate();
     }
+    afbeelding.Invalidate();
 }
 
 int mandelgetal(double x, double y)
@@ -126,7 +89,32 @@ int mandelgetal(double x, double y)
     return Mandelgetal;
 }
 
-    void BoxVeranderd(object sender, EventArgs e)
+void GeefKleur(int Mandelgetal, int x, int y)
+{
+    switch (ComboBoxKleuren.SelectedItem)
+    {
+        case "ZwartWit":
+            kleur = ZwartWit(Mandelgetal);
+            break;
+        case "Rood":
+            kleur = Rood(Mandelgetal);
+            break;
+        case "Party":
+            kleur = Party(Mandelgetal);
+            break;
+        default:
+            kleur = ZwartWit(Mandelgetal);
+            break;
+    }
+    bm.SetPixel(x, y, kleur);
+    afbeelding.Invalidate();
+
+}
+
+
+
+
+        void BoxVeranderd(object sender, EventArgs e)
 {
     try
     {
@@ -150,7 +138,6 @@ void KlikGo(object sender, EventArgs e)
         scherm.Invalidate();
         afbeelding.Invalidate();
     }
-
 }
 
 void KlikRechts(object sender, MouseEventArgs e)
@@ -165,6 +152,7 @@ void KlikRechts(object sender, MouseEventArgs e)
     boxMidX.Text = CoordX.ToString();
     boxMidY.Text = CoordY.ToString();
     boxSchaal.Text = NieuweSchaal.ToString();
+    scherm.Paint += TekenBitmap; ; 
     afbeelding.Invalidate();
 }
 
