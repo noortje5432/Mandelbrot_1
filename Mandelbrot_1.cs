@@ -67,8 +67,8 @@ void TekenBitmap(object o, PaintEventArgs pea)
             int Mandelgetal = mandelgetal(x,y);
             GeefKleur(Mandelgetal, x, y);
         }
+        afbeelding.Invalidate();
     }
-    afbeelding.Invalidate();
 }
 
 int mandelgetal(double x, double y)
@@ -158,7 +158,7 @@ void KlikRechts(object sender, MouseEventArgs e)
 
 double AfstandTotMidden(double a, double b)
 {
-    double d = (a) * (a) + (b) * (b);
+    double d = a * a + b * b;
     return d;
 }
 
