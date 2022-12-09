@@ -94,7 +94,9 @@ int mandelgetal(double x, double y)
 }
 
 
-// Dit is de methode om de kleuren uit de Combobox 
+/* Dit is de methode om de kleuren die in de combobox zijn gekozen te koppelen 
+aan een daadwerkelijke kleur */
+
 void GeefKleur(int Mandelgetal, int x, int y)
 {
     Color kleur;
@@ -202,6 +204,9 @@ Color ZwartWit(int Mandelgetal)
         return Color.White;
 }
 
+
+/* hier wordt het colorpalet van oase aangeduid.
+   Verschillende mandelgetallen hebben verschillende kleuren */
 Color Oase(int Mandelgetal)
 {
         int R = 0;
@@ -228,6 +233,8 @@ Color Oase(int Mandelgetal)
         }       
 }
 
+/* Hier wordt de kleur blauw aangeduid.
+Blauw is hier met "schaduwen" vanwege de procent/rest delingen*/
 Color Blauw(int Mandelgetal)
 {
     if (Mandelgetal % 2 == 0)
