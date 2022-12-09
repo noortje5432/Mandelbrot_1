@@ -113,7 +113,7 @@ void GeefKleur(int Mandelgetal, int x, int y)
             kleur = ZwartWit(Mandelgetal);
             break;
     }
-    bm.SetPixel(x, y, kleur);                                       //Pixel (x,y) krijgt een kleur.
+    bm.SetPixel(x, y, kleur);                                       //Pixel (x,y) krijgt een kleur zoals hierboven bepaald.
     afbeelding.Invalidate();
 }
 
@@ -153,30 +153,31 @@ void KlikGo(object sender, EventArgs e)
 }
 
 /*
-
+Bij muisklik wordt in- of uitgezoomd (respectievelijk linkermuisknop en rechtermuisknop). 
+Ook wordt de pixel waar de muis op klikt als nieuw middelpunt van de mandelbrot. 
 */
 void MuisKlik(object sender, MouseEventArgs e)
 {
-    double PixelX = e.X;
+    double PixelX = e.X;                                                //Hier wordt het pixelcoördinaat van de muisklik opgeslagen. 
     double PixelY = e.Y;
     double OudeSchaal = Schaal;
-    double CoordX = (PixelX - 200) * OudeSchaal + MidX;
+    double CoordX = (PixelX - 200) * OudeSchaal + MidX;                 //Het midden wordt nu als verschaald coördinaat gegeven. 
     double CoordY = (-PixelY + 200) * OudeSchaal + MidY;
-    boxMidX.Text = CoordX.ToString();
+    boxMidX.Text = CoordX.ToString();                                   //Het nieuwe coördinaat wordt in het tekstvak gezet.
     boxMidY.Text = CoordY.ToString();
-    if (e.Button == System.Windows.Forms.MouseButtons.Left)
+    if (e.Button == System.Windows.Forms.MouseButtons.Left)             //Bij linkermuisknop wordt het plaatje ingezoomd. 
     {
         Schaal *= 0.5;
         double NieuweSchaal = Schaal;
         boxSchaal.Text = NieuweSchaal.ToString();
     }
-    else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+    else if (e.Button == System.Windows.Forms.MouseButtons.Right)       //Bij rechtermuisknop wordt het plaatje uitgezoomd. 
     {
         Schaal *= 2;
         double NieuweSchaal = Schaal;
         boxSchaal.Text = NieuweSchaal.ToString();
     }
-    for (int x = 0; x < 400; x++)
+    for (int x = 0; x < 400; x++)                                       //Nu wordt weer de kleur van iedere pixel bepaald aan de hand van Mandelgetal. 
     {
         for (int y = 0; y < 400; y++)
         {
@@ -187,23 +188,30 @@ void MuisKlik(object sender, MouseEventArgs e)
     }
 }
 
+//Hier wordt de afstand van een pixel tot het midde berekend. Merk op dat de wortel weggelaten is, hierdoor is in TekenBitmap <=4 gebruikt. 
 double AfstandTotMidden(double a, double b)
 {
     double d = a * a + b * b;
     return d;
 }
 
+//f(a) wordt berekend. 
 double Nieuwea(double a, double b, double xschaal)
 {
     double nieuwea = a * a - b * b + xschaal;
     return nieuwea;
 }
 
+//f(b) wordt berekend. 
 double Nieuweb(double a, double b, double yschaal)
 {
     double nieuweb = 2 * a * b + yschaal;
     return nieuweb;
 }
+
+/*
+Als het mandelgetal even is 
+ */
 Color ZwartWit(int Mandelgetal)
 {
     if (Mandelgetal % 2 == 0)
@@ -211,7 +219,6 @@ Color ZwartWit(int Mandelgetal)
     else
         return Color.White;
 }
-
 
 /* hier wordt het colorpalet van oase aangeduid.
    Verschillende mandelgetallen hebben verschillende kleuren */
