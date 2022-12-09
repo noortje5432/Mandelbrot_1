@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Globalization;
+using System.Security.Cryptography;
 
 Form scherm = new();
 double MidX = 0, MidY = 0, Schaal = 0, MaxA = 0;
@@ -114,10 +115,13 @@ void BoxVeranderd(object sender, EventArgs e)
 {
     try
     {
-        MidX = double.Parse(boxMidX.Text, CultureInfo.InvariantCulture); boxMidX.BackColor = Color.White;
-        MidY = double.Parse(boxMidY.Text); boxMidY.BackColor = Color.White;
-        Schaal = double.Parse(boxSchaal.Text); boxSchaal.BackColor = Color.White;
-        MaxA = double.Parse(boxMaxA.Text); boxMaxA.BackColor = Color.White;
+        string GoedeX = boxMidX.Text.Replace(',', '.');
+        MidX = double.Parse(boxMidX.Text/*GoedeX, CultureInfo.InvariantCulture*/); boxMidX.BackColor = Color.White;
+        string GoedeY = boxMidY.Text.Replace(',', '.');
+        MidX = double.Parse(GoedeY, CultureInfo.InvariantCulture); boxMidY.BackColor = Color.White;
+        string GoedeSchaal = boxSchaal.Text.Replace(',', '.');
+        Schaal = double.Parse(GoedeSchaal, CultureInfo.InvariantCulture); boxSchaal.BackColor = Color.White;
+        MaxA = int.Parse(boxMaxA.Text); boxMaxA.BackColor = Color.White;
         afbeelding.Invalidate();
     }
 
