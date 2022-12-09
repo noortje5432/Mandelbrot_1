@@ -47,15 +47,12 @@ boxSchaal.Location = new Point(150, 90); boxSchaal.Size = new Size(100, 30); box
 boxMaxA.Location = new Point(150, 130); boxMaxA.Size = new Size(100, 30); boxMaxA.Text = 100.ToString();
 
 //Achtergrond Mandelbrot maken
-
-
 Label afbeelding = new(); scherm.Controls.Add(afbeelding);
 afbeelding.Location = new Point(10, 210);
 afbeelding.Size = new Size(400, 400);
 afbeelding.Image = bm;
 
 // ComboBox maken voor kleurkeuzes
-
 ComboBox ComboBoxKleuren = new(); scherm.Controls.Add(ComboBoxKleuren);
 ComboBoxKleuren.Location = new Point(150, 170);
 ComboBoxKleuren.Size = new Size(100, 30);
