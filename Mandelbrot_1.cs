@@ -3,8 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 
 Form scherm = new();
-
-
 double MidX = 0, MidY = 0, Schaal = 0, MaxA = 0;
 
 scherm.Text = "Mandelbrot";
@@ -108,10 +106,7 @@ void GeefKleur(int Mandelgetal, int x, int y)
     }
     bm.SetPixel(x, y, kleur);
     afbeelding.Invalidate();
-
 }
-
-
 
 
         void BoxVeranderd(object sender, EventArgs e)
@@ -140,20 +135,36 @@ void KlikGo(object sender, EventArgs e)
     }
 }
 
-void KlikRechts(object sender, MouseEventArgs e)
+void MuisKlik(object sender, MouseEventArgs e)
 {
     double PixelX = e.X;
     double PixelY = e.Y;
     double OudeSchaal = Schaal;
-    Schaal *= 0.5;
-    double CoordX = (PixelX - 200) * 0.01 + MidX;
-    double CoordY = (-PixelY + 200) * 0.01 + MidY;
-    double NieuweSchaal = Schaal;
+    double CoordX = (PixelX - 200) * OudeSchaal + MidX;
+    double CoordY = (-PixelY + 200) * OudeSchaal + MidY;
     boxMidX.Text = CoordX.ToString();
     boxMidY.Text = CoordY.ToString();
-    boxSchaal.Text = NieuweSchaal.ToString();
-    scherm.Paint += TekenBitmap; ; 
-    afbeelding.Invalidate();
+    for (int x = 0; x < 400; x++)
+    {
+        for (int y = 0; y < 400; y++)
+        {
+            int Mandelgetal = mandelgetal(x, y);
+            GeefKleur(Mandelgetal, x, y);
+        }
+        afbeelding.Invalidate();
+    }
+    if (e.Button == System.Windows.Forms.MouseButtons.Left)
+    {
+        Schaal *= 0.5;
+        double NieuweSchaal = Schaal;
+        boxSchaal.Text = NieuweSchaal.ToString();
+    }
+    else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+    {
+        Schaal *= 2;
+        double NieuweSchaal = Schaal;
+        boxSchaal.Text = NieuweSchaal.ToString();
+    }
 }
 
 double AfstandTotMidden(double a, double b)
@@ -186,6 +197,23 @@ Color Rood(int Mandelgetal)
         int R = 0;
         int G = 0;
         int B = 0;
+        if (Mandelgetal >= 512)
+        {
+            R = Mandelgetal - 512;
+            G = 255 - R;
+            return Color.FromArgb(R, G, B);
+        }
+        else if (Mandelgetal >= 256)
+        {
+            G = Mandelgetal - 256;
+            B = 255 - G;
+            return Color.FromArgb(R, G, B);
+        }
+        else
+        {
+            B = Mandelgetal;
+            return Color.FromArgb(R, G, B);
+        }       
     if (Mandelgetal >= 512 && Mandelgetal < 768) 
     {
         R = Mandelgetal - 512;
@@ -206,10 +234,6 @@ Color Rood(int Mandelgetal)
 
 }
 
-
- 
-
-
 Color Party(int Mandelgetal)
 {
     if (Mandelgetal % 2 == 0)
@@ -218,19 +242,12 @@ Color Party(int Mandelgetal)
         return Color.FromArgb(0, 0, Mandelgetal % 16 * 15);
 }
 
-/*if (Mandelgetal % 2 == 0)
-        return Color.Black;
-    else
-        return Color.FromKnownColor(KnownColor.Red);
-    */
-
-
 Go.Click += KlikGo;
 boxMidX.TextChanged += BoxVeranderd;
 boxMidY.TextChanged += BoxVeranderd;
 boxSchaal.TextChanged += BoxVeranderd;
 boxMaxA.TextChanged += BoxVeranderd;
 BoxVeranderd(null, null);
-afbeelding.MouseClick += KlikRechts;
+afbeelding.MouseClick += MuisKlik;
 scherm.Paint += TekenBitmap;
 Application.Run(scherm);
