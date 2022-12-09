@@ -88,7 +88,7 @@ int mandelgetal(double x, double y)
         double oudeb = b;
         a = Nieuwea(oudea, oudeb, xschaal);                         //Hier wordt f(a,b) berekend.  
         b = Nieuweb(oudea, oudeb, yschaal);                         //Merk hierbij op dat we oudea en oudeb gebruikt worden, omdat ander f(b) niet goed berekend wordt.
-        Mandelgetal++;                                              //Er wordt één bij Manderlgetal opgeteld. 
+        Mandelgetal++;                                              //Er wordt één bij Mandelgetal opgeteld. 
     }
     return Mandelgetal;                                             //Mandelgetal wordt teruggegeven. 
 }
