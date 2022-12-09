@@ -186,24 +186,24 @@ Color Rood(int Mandelgetal)
         int R = 0;
         int G = 0;
         int B = 0;
-        if (Mandelgetal >= 512)
-        {
-            R = Mandelgetal - 512;
-            G = 255 - R;
-            return Color.FromArgb(R, G, B);
-        }
-        else if (Mandelgetal >= 256)
-        {
-            G = Mandelgetal - 256;
-            B = 255 - G;
-            return Color.FromArgb(R, G, B);
-        }
-        else
-        {
-            B = Mandelgetal;
-            return Color.FromArgb(R, G, B);
-        }
-        
+    if (Mandelgetal >= 512 && Mandelgetal < 768) 
+    {
+        R = Mandelgetal - 512;
+        G = 255 - R;
+        return Color.FromArgb(R, G, B);
+    }
+    else if (Mandelgetal >= 256 && Mandelgetal < 512)
+    {
+        G = Mandelgetal - 256;
+        B = 255 - G;
+        return Color.FromArgb(R, G, B);
+    }
+    else
+    {
+        B = Mandelgetal;
+        return Color.FromArgb(R, G, B);
+    }
+
 }
 
 
