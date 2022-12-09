@@ -64,19 +64,19 @@ void TekenBitmap(object o, PaintEventArgs pea)
     {
         for (int y = 0; y < 400; y++)
         {
-            int Mandelgetal = 0;
+            int Mandelgetal = mandelgetal(x,y);
+            /*int Mandelgetal = 0;
             double a = 0;
             double b = 0;
             while (AfstandTotMidden(a, b) <= 4 && Mandelgetal < MaxA)
             {
-                double xschaal = (double)(x - 200.0) * Schaal + MidX;
-                double yschaal = (double)(-y + 200.0) * Schaal + MidY;
+                double xschaal = (x - 200.0) * Schaal + MidX;
+                double yschaal = (-y + 200.0) * Schaal + MidY;
                 double oudea = a;
                 double oudeb = b;
                 a = Nieuwea(oudea, oudeb, xschaal);
                 b = Nieuweb(oudea, oudeb, yschaal);
-                Mandelgetal++;
-            }
+                Mandelgetal++;*/
             switch (ComboBoxKleuren.SelectedItem)
             {
                 case "ZwartWit":
@@ -108,7 +108,25 @@ void TekenBitmap(object o, PaintEventArgs pea)
     }
 }
 
-void BoxVeranderd(object sender, EventArgs e)
+int mandelgetal(double x, double y)
+{
+    int Mandelgetal = 0;
+    double a = 0;
+    double b = 0;
+    while (AfstandTotMidden(a, b) <= 4 && Mandelgetal < MaxA)
+    {
+        double xschaal = (x - 200.0) * Schaal + MidX;
+        double yschaal = (-y + 200.0) * Schaal + MidY;
+        double oudea = a;
+        double oudeb = b;
+        a = Nieuwea(oudea, oudeb, xschaal);
+        b = Nieuweb(oudea, oudeb, yschaal);
+        Mandelgetal++;
+    }
+    return Mandelgetal;
+}
+
+    void BoxVeranderd(object sender, EventArgs e)
 {
     try
     {
@@ -137,12 +155,12 @@ void KlikGo(object sender, EventArgs e)
 
 void KlikRechts(object sender, MouseEventArgs e)
 {
-    MidX = e.X;
-    MidY = e.Y;
+    double PixelX = e.X;
+    double PixelY = e.Y;
     double OudeSchaal = Schaal;
     Schaal *= 0.5;
-    double CoordX = (MidX - 200) * OudeSchaal;
-    double CoordY = (-MidY + 200) * OudeSchaal;
+    double CoordX = (PixelX - 200) * 0.01 + MidX;
+    double CoordY = (-PixelY + 200) * 0.01 + MidY;
     double NieuweSchaal = Schaal;
     boxMidX.Text = CoordX.ToString();
     boxMidY.Text = CoordY.ToString();
