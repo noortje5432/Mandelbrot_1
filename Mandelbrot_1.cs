@@ -144,15 +144,6 @@ void MuisKlik(object sender, MouseEventArgs e)
     double CoordY = (-PixelY + 200) * OudeSchaal + MidY;
     boxMidX.Text = CoordX.ToString();
     boxMidY.Text = CoordY.ToString();
-    for (int x = 0; x < 400; x++)
-    {
-        for (int y = 0; y < 400; y++)
-        {
-            int Mandelgetal = mandelgetal(x, y);
-            GeefKleur(Mandelgetal, x, y);
-        }
-        afbeelding.Invalidate();
-    }
     if (e.Button == System.Windows.Forms.MouseButtons.Left)
     {
         Schaal *= 0.5;
@@ -164,6 +155,15 @@ void MuisKlik(object sender, MouseEventArgs e)
         Schaal *= 2;
         double NieuweSchaal = Schaal;
         boxSchaal.Text = NieuweSchaal.ToString();
+    }
+    for (int x = 0; x < 400; x++)
+    {
+        for (int y = 0; y < 400; y++)
+        {
+            int Mandelgetal = mandelgetal(x, y);
+            GeefKleur(Mandelgetal, x, y);
+        }
+        afbeelding.Invalidate();
     }
 }
 
