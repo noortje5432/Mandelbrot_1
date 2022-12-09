@@ -30,10 +30,10 @@ labSchaal.Location = new Point(10, 90); labSchaal.Size = new Size(100, 30); labS
 labMaxA.Location = new Point(10, 130); labMaxA.Size = new Size(100, 30); labMaxA.Text = "Maximaal aantal:";
 
 //Schrijfvlakken maken
-TextBox boxMidX = new TextBox(); scherm.Controls.Add((TextBox)boxMidX);
-TextBox boxMidY = new TextBox(); scherm.Controls.Add((TextBox)boxMidY);
-TextBox boxSchaal = new TextBox(); scherm.Controls.Add((TextBox)boxSchaal);
-TextBox boxMaxA = new TextBox(); scherm.Controls.Add((TextBox)boxMaxA);
+TextBox boxMidX = new(); scherm.Controls.Add((TextBox)boxMidX);
+TextBox boxMidY = new(); scherm.Controls.Add((TextBox)boxMidY);
+TextBox boxSchaal = new(); scherm.Controls.Add((TextBox)boxSchaal);
+TextBox boxMaxA = new(); scherm.Controls.Add((TextBox)boxMaxA);
 
 boxMidX.Location = new Point(150, 10); boxMidX.Size = new Size(100, 30); boxMidX.Text = 0.ToString();
 boxMidY.Location = new Point(150, 50); boxMidY.Size = new Size(100, 30); boxMidY.Text = 0.ToString();
@@ -43,7 +43,7 @@ boxMaxA.Location = new Point(150, 130); boxMaxA.Size = new Size(100, 30); boxMax
 //Achtergrond Mandelbrot maken
 
 
-Label afbeelding = new Label(); scherm.Controls.Add(afbeelding);
+Label afbeelding = new(); scherm.Controls.Add(afbeelding);
 afbeelding.Location = new Point(10, 190);
 afbeelding.Size = new Size(400, 400);
 afbeelding.Image = bm;
