@@ -92,6 +92,8 @@ int mandelgetal(double x, double y)
     return Mandelgetal;
 }
 
+
+// Dit is de methode om de kleuren uit de Combobox 
 void GeefKleur(int Mandelgetal, int x, int y)
 {
     Color kleur;
