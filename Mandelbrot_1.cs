@@ -16,18 +16,23 @@ Bitmap bm = new(400, 400);
 
 //Aanmaken van de button Go!
 Button Go = new(); scherm.Controls.Add(Go);
-Go.Location = new Point(280, 130); Go.Text = "Go!";
+Go.Location = new Point(280, 170); Go.Text = "Go!";
 
 //tekstvakken maken en locatie geven.
 Label labMidX = new(); scherm.Controls.Add(labMidX);
 Label labMidY = new(); scherm.Controls.Add(labMidY);
 Label labSchaal = new(); scherm.Controls.Add(labSchaal);
 Label labMaxA = new(); scherm.Controls.Add(labMaxA);
+Label kiesKleur = new(); scherm.Controls.Add(kiesKleur);
+Label uitleg = new(); scherm.Controls.Add(uitleg);
 
 labMidX.Location = new Point(10, 10); labMidX.Size = new Size(100, 30); labMidX.Text = "Midden x:";
 labMidY.Location = new Point(10, 50); labMidY.Size = new Size(100, 30); labMidY.Text = "Midden y:";
 labSchaal.Location = new Point(10, 90); labSchaal.Size = new Size(100, 30); labSchaal.Text = "Schaal:";
 labMaxA.Location = new Point(10, 130); labMaxA.Size = new Size(100, 30); labMaxA.Text = "Maximaal aantal:";
+kiesKleur.Location = new Point(10, 170); kiesKleur.Size = new Size(100, 30); kiesKleur.Text = "Kies kleur:";
+uitleg.Location = new Point(10, 650); uitleg.Size = new Size(190, 30); uitleg.Text = "Links klikken is inzoomen en rechts klikken is uitzoomen";
+
 
 //Invulvlakken maken
 TextBox boxMidX = new(); scherm.Controls.Add((TextBox)boxMidX);
@@ -51,8 +56,8 @@ afbeelding.Image = bm;
 // ComboBox maken voor kleurkeuzes
 
 ComboBox ComboBoxKleuren = new(); scherm.Controls.Add(ComboBoxKleuren);
-ComboBoxKleuren.Location = new Point(10, 170);
-ComboBoxKleuren.Size = new Size(100, 20);
+ComboBoxKleuren.Location = new Point(150, 170);
+ComboBoxKleuren.Size = new Size(100, 30);
 ComboBoxKleuren.Items.Add("ZwartWit");
 ComboBoxKleuren.Items.Add("Oase");
 ComboBoxKleuren.Items.Add("Blauw");
