@@ -60,7 +60,7 @@ ComboBoxKleuren.Items.Add("ZwartWit");
 ComboBoxKleuren.Items.Add("Oase");
 ComboBoxKleuren.Items.Add("Blauw");
 
-
+//Door TekenBitmap uit te voeren, worden de mandelgetallen en kleuren bepaald. 
 void TekenBitmap(object o, PaintEventArgs pea)
 {
     for (int x = 0; x < 400; x++)
@@ -74,22 +74,23 @@ void TekenBitmap(object o, PaintEventArgs pea)
     }
 }
 
+//Berekenen Mandelgetal.
 int mandelgetal(double x, double y)
 {
     int Mandelgetal = 0;
     double a = 0;
     double b = 0;
-    while (AfstandTotMidden(a, b) <= 4 && Mandelgetal < MaxA)
+    while (AfstandTotMidden(a, b) <= 4 && Mandelgetal < MaxA)       //Van afstandTotMidden wordt niet wortel genomen, daarom <= 4. 
     {
-        double xschaal = (x - 200.0) * Schaal + MidX;
+        double xschaal = (x - 200.0) * Schaal + MidX;               //xschaal en yschaal zijn de middelpunten van het scherm. 
         double yschaal = (-y + 200.0) * Schaal + MidY;
         double oudea = a;
         double oudeb = b;
-        a = Nieuwea(oudea, oudeb, xschaal);
-        b = Nieuweb(oudea, oudeb, yschaal);
-        Mandelgetal++;
+        a = Nieuwea(oudea, oudeb, xschaal);                         //Hier wordt f(a,b) berekend.  
+        b = Nieuweb(oudea, oudeb, yschaal);                         //Merk hierbij op dat we oudea en oudeb gebruikt worden, omdat ander f(b) niet goed berekend wordt.
+        Mandelgetal++;                                              //Er wordt één bij Manderlgetal opgeteld. 
     }
-    return Mandelgetal;
+    return Mandelgetal;                                             //Mandelgetal wordt teruggegeven. 
 }
 
 
